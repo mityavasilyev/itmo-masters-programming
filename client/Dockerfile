@@ -5,10 +5,7 @@ FROM gradle:7.5-jdk17 as build
 WORKDIR /app
 
 # Copy the client source code into the container
-COPY src/main/java/io/github/mityavasilyev/itmomastersprogramming/client/TCPClient.java /app/TCPClient.java
-
-# Copy the build.gradle file into the container
-COPY build.gradle /app/build.gradle
+COPY . /app
 
 # Build the client application
 RUN gradle build
