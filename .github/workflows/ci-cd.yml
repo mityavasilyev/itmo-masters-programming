@@ -1,0 +1,30 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build Docker Images
+        run: |
+          docker build -t client:latest client/
+          docker build -t server:latest server/
+
+      - name: Run Server and Client in Docker
+        run: |
+          docker run -d --name server server:latest
+          docker run --network=host client:latest
+
+      - name: Run Tests
+        run: |
+          ./test_commands.sh
