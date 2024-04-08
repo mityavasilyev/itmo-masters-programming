@@ -5,9 +5,8 @@ test_command() {
     local command=$1
     local expected_response=$2
     echo "Sending command: $command"
-    # Assuming the server is running on localhost and the default port
-    echo "$command" | nc localhost 1234
-    read -r response
+    # Use nc with a timeout of 5 seconds
+    response=$(echo "$command" | nc -w 5 localhost 1234)
     if [[ "$response" == "$expected_response" ]]; then
         echo "Test passed: $command"
     else
