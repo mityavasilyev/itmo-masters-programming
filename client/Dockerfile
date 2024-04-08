@@ -1,5 +1,5 @@
 # Use an official Java runtime as a parent image
-FROM gradle:7.3.3-jdk17 as build
+FROM gradle:7.5-jdk17 as build
 
 # Set the working directory in the container
 WORKDIR /app
@@ -20,7 +20,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the client JAR file from the build stage into the final image
-COPY --from=build /app/build/libs/TCPClient.jar /app/TCPClient.jar
+COPY --from=build /app/build/libs/*.jar /app/TCPClient.jar
 
 # Run the client
 CMD ["java", "-jar", "/app/TCPClient.jar"]
