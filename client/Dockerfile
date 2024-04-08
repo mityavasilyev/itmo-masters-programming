@@ -14,7 +14,7 @@ COPY client/pom.xml /app/pom.xml
 RUN mvn clean package
 
 # Use an official Java runtime as a parent image for the final image
-FROM openjdk:17-jre-slim
+FROM openjdk:17-jdk-slim
 
 # Set the working directory in the container
 WORKDIR /app
