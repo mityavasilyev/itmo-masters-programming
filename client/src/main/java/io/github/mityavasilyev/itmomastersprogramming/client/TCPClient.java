@@ -17,14 +17,21 @@ public class TCPClient {
 
         BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
 
+        System.out.println("Connected to server. Enter commands to send.");
+
         while (true) {
             System.out.print("Введите команду: ");
             String command = userInput.readLine();
-            if (command.equalsIgnoreCase("exit")) break;
+            if (command == null || command.equalsIgnoreCase("exit")) break;
 
             out.println(command);
             String response = in.readLine();
-            System.out.println("Ответ сервера: " + response);
+            if (response != null) {
+                System.out.println("Ответ сервера: " + response);
+            } else {
+                System.out.println("Server closed the connection.");
+                break;
+            }
         }
 
         socket.close();

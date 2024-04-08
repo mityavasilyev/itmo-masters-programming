@@ -19,5 +19,7 @@ WORKDIR /app
 # Copy the server JAR file from the build stage into the final image
 COPY --from=build /app/build/libs/*.jar /app/TCPServer.jar
 
+EXPOSE 1234
+
 # Run the server
 CMD ["java", "-jar", "/app/TCPServer.jar"]
