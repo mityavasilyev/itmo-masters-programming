@@ -17,8 +17,10 @@ jobs:
 
       - name: Build Docker Images
         run: |
-          docker build -t client:latest client/
-          docker build -t server:latest server/
+          cd client
+          docker build -t client:latest .
+          cd ../server
+          docker build -t server:latest .
 
       - name: Run Server and Client in Docker
         run: |
