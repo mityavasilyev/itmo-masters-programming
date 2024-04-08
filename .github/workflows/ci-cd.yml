@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Server and Client in Docker
         run: |
-          docker run -d --name server server:latest
+          docker run -d --network=host --name server server:latest
           
           echo "Waiting for server to start..."
           for i in {1..10}; do
