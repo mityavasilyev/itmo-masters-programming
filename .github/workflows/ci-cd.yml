@@ -24,7 +24,22 @@ jobs:
 
       - name: Run Server and Client in Docker
         run: |
+#         Start server
           docker run -d --name server server:latest
+          
+#         Wait for server to start
+          echo "Waiting for server to start..."
+          for i in {1..10}; do
+            if nc -z localhost 1234; then
+              echo "Server is up."
+              break
+            else
+              echo "Waiting... $i"
+              sleep 5
+            fi
+          done
+               
+#         Start client
           docker run --network=host client:latest
 
       - name: Run Tests
